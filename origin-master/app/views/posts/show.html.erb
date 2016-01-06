@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Post:</strong>
+  <%= @post.post%><br><br>
+  </p>
+
+<p>
+  <strong>Description:</strong>
+  <%=  @post.description%><br><br>
+  </p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @post.image_url%><br><br>
+  </p>
+
+<br>
+<p>
+ <% if @post.comments.present? %>
+<% @post.comments.each do |c| %>
+comments:<%=c.comments %>
+<%end%>
+</p>
+<%end%>
+<%= link_to 'Add Comments', new_comment_path(id: @post.id) %>
+<% if @post.user == current_user %>
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%end%>
+<%= link_to 'Back', posts_path %>
+
+
+<% if @post.user == current_user %>
+<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+<%end%>
